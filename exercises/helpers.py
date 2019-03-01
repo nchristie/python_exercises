@@ -13,7 +13,8 @@ def question_tuple_maker(q_num, info, question, answer):
     return task
 
 
-def run_questions(score, retry_dict, number_of_questions):
+def run_questions(score, retry_dict):
+    number_of_questions = len(retry_dict)
     remove_list = []
     for i in retry_dict:
         task = question_tuple_maker(i[0], i[1], i[2], i[3])
