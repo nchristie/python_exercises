@@ -4,7 +4,6 @@ from exercises.tasks import TASKS, BLURB
 
 def run():
     print(BLURB)
-
     list_of_remaining_questions = run_all_questions(create_question_list(ennumerate_task_list(TASKS)))
 
     while list_of_remaining_questions:

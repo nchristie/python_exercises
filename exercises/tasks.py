@@ -50,14 +50,14 @@ TASKS = [
     [PRINT_SHOES, "Can you mutiply this list by 5?\n", ["shoes", "*", "5"], {"shoes": SHOES}],
     [
         PRINT_CLOTHES,
-        "Can you remove the second element from the list?\n\n",
-        ["del", "clothes", "[1]"],
+        "Can you remove the element 'socks' from the list without knowing its index?\n\n",
+        ["clothes", "('socks')", ".", "remove"],
         {"clothes": CLOTHES},
     ],
     [
         PRINT_CLOTHES,
-        "Can you remove the element 'shorts' from the list without knowing its index?\n\n",
-        ["clothes", "('shorts')", ".", "remove"],
+        "Can you remove the second element from the list?\n\n",
+        ["del", "clothes", "[1]"],
         {"clothes": CLOTHES},
     ],
 ]

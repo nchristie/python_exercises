@@ -1,36 +1,38 @@
-from exercises.helpers import is_correct_answer, ennumerate_task_list, question_tuple_maker, standardise_string, create_question_list, run_all_questions, get_output_for_user
+from exercises.helpers import (
+    is_correct_answer,
+    ennumerate_task_list,
+    question_tuple_maker,
+    standardise_string,
+    create_question_list,
+    run_all_questions,
+    get_output_for_user,
+)
 from exercises.question_runner import run
 from collections import namedtuple
 import unittest
 import pytest
 from unittest import TestCase, mock
 from exercises.tasks import *
+from exercises.question_runner import _bonus
 
 
 class Tests(unittest.TestCase):
     # SETUP
-
-    SHORTER_TASKS = [
-        ["", "type a\n\n", ["a"], {"a": 1}],
-        ["", 'type "b"\n\n', ["b"], {"b": 2}],
-        ["", 'type "c"\n\n', ["c"], {"c": 3}],
-    ]
-
 
     clothes = ["shirt", "trousers", "blouse", "socks", "leggings", "shorts"]
 
     shoes = ["sneakers", "heels", "flip-flops"]
 
     raw_task_list = [
-    ["", "type a\n\n", ["a"], {"a": 1}],
-    ["", 'type "b"\n\n', ["b"], {"b": 2}],
-    ["", 'type "c"\n\n', ["c"], {"c": 3}],
-]
+        ["", "type a\n\n", ["a"], {"a": 1}],
+        ["", 'type "b"\n\n', ["b"], {"b": 2}],
+        ["", 'type "c"\n\n', ["c"], {"c": 3}],
+    ]
 
     enumerated_task_list = [
         [1, "instructions", "question", ["a", "b"], {"a": "a", "b": "b"}],
-        [2, "instructions", "question", ["c", "d"], {"c": "c", "d": "d"}]
-        ]
+        [2, "instructions", "question", ["c", "d"], {"c": "c", "d": "d"}],
+    ]
 
     Task = namedtuple("Task", ["q_num", "info", "question", "answer", "prerequisites"])
 
@@ -38,56 +40,81 @@ class Tests(unittest.TestCase):
         q_num=1, info="instructions", question="question", answer=["a", "b"], prerequisites={"a": "a", "b": "b"}
     )
 
-    task_tuple_b = Task(q_num=2, info="instructions", question="question", answer=["c", "d"], prerequisites={"c": "c", "d": "d"})
+    task_tuple_b = Task(
+        q_num=2, info="instructions", question="question", answer=["c", "d"], prerequisites={"c": "c", "d": "d"}
+    )
 
     real_question_1 = Task(
-        q_num=1, info="instructions", question="Can you change the third element to be 'jacket' instead?\n\n", answer=["clothes", "2", "'jacket'"], prerequisites={"clothes": clothes}
+        q_num=1,
+        info="instructions",
+        question="Can you change the third element to be 'jacket' instead?\n\n",
+        answer=["clothes", "2", "'jacket'"],
+        prerequisites={"clothes": clothes},
     )
 
     real_question_2 = Task(
-        q_num=1, info="instructions", question="Can you remove the second element from the list?\n\n", answer=["del", "clothes", "[1]"], prerequisites={"clothes": clothes}
+        q_num=1,
+        info="instructions",
+        question="Can you remove the second element from the list?\n\n",
+        answer=["del", "clothes", "[1]"],
+        prerequisites={"clothes": clothes},
     )
 
     real_question_3 = Task(
-        q_num=1, info="instructions", question="Can you mutiply this list by 5?\n", answer=["shoes", "*", "5"], prerequisites={"shoes": shoes}
+        q_num=1,
+        info="instructions",
+        question="Can you mutiply this list by 5?\n",
+        answer=["shoes", "*", "5"],
+        prerequisites={"shoes": shoes},
     )
-
 
     list_of_remaining_questions = [task_tuple_a, task_tuple_b]
 
-
     real_list_of_remaining_questions = [real_question_1, real_question_2]
 
-    @mock.patch("exercises.tasks.TASKS", task_list=[
-        ["", "type a\n\n", ["a"], {"a": 1}],
-        ["", 'type "b"\n\n', ["b"], {"b": 2}],
-        ["", 'type "c"\n\n', ["c"], {"c": 3}],
-    ])
+
+    @mock.patch("exercises.question_runner._bonus", bonus="")
+    @mock.patch("exercises.question_runner.BLURB", name="This is a test run")
+    @mock.patch(
+        "exercises.tasks.TASKS",
+        task_list=[
+            ["", "type a\n\n", ["a"], {"a": 1}],
+            ["", 'type "b"\n\n', ["b"], {"b": 2}],
+            ["", 'type "c"\n\n', ["c"], {"c": 3}],
+        ],
+    )
     @mock.patch("exercises.helpers._get_input", side_effect=["a", "b", "c"])
-    def test_run_shorter_tasks(self, _get_input_mock, _mock_task_list):
-        #GIVEN
+    def test_run_shorter_tasks(self, mock_get_input, mock_task_list, mock_blurb, mock_bonus):
+        # GIVEN
+        print(f"mock_blurb = {mock_blurb}, mock_task_list = {mock_task_list}")
         run()
 
         # THEN
-        _get_input_mock.assert_called_with()
+        assert mock_bonus.called_once_with()
+        self.assertTrue(False) # see 'You got 0/0 questions right', expect 3/3
 
-    # @mock.patch("exercises.tasks.TASKS", task_list=TASKS[:-1])
-    # @mock.patch("exercises.helpers._get_input", side_effect=[
-    #     "clothes[2] = 'jacket'",
-    #     "clothes[-1] = 'hat'",
-    #     "clothes[-2] = clothes[0]",
-    #     "clothes.append('jumper')",
-    #     "clothes = clothes + shoes",
-    #     "shoes * 5",
-    #     "del clothes[1]",
-    #     #"clothes.remove('shorts')"
-    #     ])
-    # def test_run(self, _get_input_mock, _mock_task_list):
-    #     #GIVEN
-    #     run()
 
-    #     # THEN
-    #     #self.assertTrue(False)
+    @mock.patch(
+        "exercises.helpers._get_input",
+        side_effect=[
+            "clothes[2] = 'jacket'",
+            "clothes[-1] = 'hat'",
+            "clothes[-2] = clothes[0]",
+            "clothes.append('jumper')",
+            "clothes = clothes + shoes",
+            "shoes * 5",
+            "clothes.remove('socks')",
+            "del clothes[1]",
+        ],
+    )
+    @mock.patch("exercises.question_runner._bonus", bonus="")
+    def test_run(self, mock_bonus, mock_get_input):
+        # GIVEN
+        run()
+
+        # THEN
+        assert mock_bonus.called_once_with()
+
 
     def test_ennumerate_task_list(self):
         # GIVEN
@@ -99,7 +126,6 @@ class Tests(unittest.TestCase):
 
         # THEN
         self.assertEqual(expected, actual)
-
 
     def test_question_tuple_maker(self):
         # GIVEN
@@ -113,7 +139,6 @@ class Tests(unittest.TestCase):
         # THEN
         self.assertEqual(expected, actual)
 
-
     def test_create_question_list(self):
         # WHEN
         expected = self.list_of_remaining_questions
@@ -121,7 +146,6 @@ class Tests(unittest.TestCase):
 
         # THEN
         self.assertEqual(expected, actual)
-
 
     @mock.patch("exercises.helpers._get_input", side_effect=[0, 1])
     def test_run_all_questions(self, _get_input_mock):
@@ -132,7 +156,6 @@ class Tests(unittest.TestCase):
         # THEN
         _get_input_mock.assert_called_with()
 
-
     @mock.patch("exercises.helpers._get_input", side_effect=["clothes[2]='jacket'", "del clothes[1]"])
     def test_run_all_questions_with_real_answers_all_correct(self, _get_input_mock):
         # WHEN
@@ -141,7 +164,6 @@ class Tests(unittest.TestCase):
 
         # THEN
         self.assertEqual(expected, actual)
-
 
     @mock.patch("exercises.helpers._get_input", side_effect=["z", "del clothes[1]"])
     def test_run_all_questions_with_real_answer_one_right(self, _get_input_mock):
@@ -152,7 +174,6 @@ class Tests(unittest.TestCase):
         # THEN
         self.assertEqual(expected, actual)
 
-
     @mock.patch("exercises.helpers._get_input", side_effect=[None, "y"])
     def test_run_all_questions_with_real_answer_all_wrong(self, _get_input_mock):
         # WHEN
@@ -162,7 +183,6 @@ class Tests(unittest.TestCase):
         # THEN
         self.assertEqual(expected, actual)
 
-
     def test_check_fail(self):
         # WHEN
         answer_to_question = "xyz"
@@ -170,14 +190,12 @@ class Tests(unittest.TestCase):
         # THEN
         self.assertFalse(is_correct_answer(self.task_tuple_a, answer_to_question))
 
-
     def test_check_pass(self):
         # WHEN
         answer_to_question = "a + b"
 
         # THEN
         self.assertTrue(is_correct_answer(self.task_tuple_a, answer_to_question))
-
 
     def test_check_pass_del(self):
         # GIVEN
@@ -195,7 +213,6 @@ class Tests(unittest.TestCase):
         # THEN
         self.assertTrue(is_correct_answer(task_tuple, answer_to_question))
 
-
     def test_check_fail_no_answer(self):
         # GIVEN
         clothes = ["shirt", "trousers", "blouse", "socks", "leggings", "shorts"]
@@ -211,7 +228,6 @@ class Tests(unittest.TestCase):
 
         # THEN
         self.assertFalse(is_correct_answer(task_tuple, answer_to_question))
-
 
     def test_check_fail_no_answer_no_exception(self):
         # GIVEN
@@ -233,7 +249,6 @@ class Tests(unittest.TestCase):
             print(e)
             self.fail("is_correct_answer() raised exception on answer_to_question = None")
 
-
     def test_check_pass_double_quotes(self):
         # GIVEN
         clothes = ["a", "b", "c"]
@@ -248,7 +263,6 @@ class Tests(unittest.TestCase):
         # THEN
         self.assertTrue(is_correct_answer(task_tuple, answer_to_question))
 
-
     def test_standardise_string_quotes(self):
         # GIVEN
         string = "'x'"
@@ -259,7 +273,6 @@ class Tests(unittest.TestCase):
 
         # THEN
         self.assertEqual(expected, actual)
-
 
     def test_standardise_string_none(self):
         # GIVEN
@@ -272,8 +285,6 @@ class Tests(unittest.TestCase):
         # THEN
         self.assertEqual(expected, actual)
 
-
-
     def test_get_output_for_user(self):
         # GIVEN
         answer_to_question = "shoes * 5"
@@ -284,7 +295,6 @@ class Tests(unittest.TestCase):
 
         # THEN
         self.assertEqual(expected, actual)
-
 
     def test_get_output_for_user_exception(self):
         # GIVEN
@@ -297,7 +307,6 @@ class Tests(unittest.TestCase):
         # THEN
         self.assertEqual(expected, actual)
 
-
     def test_get_output_for_user_none(self):
         # GIVEN
         answer_to_question = None
@@ -309,9 +318,8 @@ class Tests(unittest.TestCase):
         # THEN
         self.assertEqual(expected, actual)
 
-
     # def test_xxx(self):
-        # GIVEN
-        # WHEN
-        # THEN
+    # GIVEN
+    # WHEN
+    # THEN
     #     self.assertTrue(False)
