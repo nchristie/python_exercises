@@ -21,17 +21,16 @@ def create_question_list(ennumerated_tasks):
     return list_of_remaining_questions
 
 
-def _get_input(task_tuple):
-    print(task_tuple.info)
-    print(f"{task_tuple.q_num}. {task_tuple.question}")
-    answer_to_question = input()
-    return answer_to_question
+def _get_input():
+    return input()
 
 
 def run_all_questions(list_of_remaining_questions):
     remove_list = []
     for task_tuple in list_of_remaining_questions:
-        answer_to_question = _get_input(task_tuple)
+        print(task_tuple.info)
+        print(f"{task_tuple.q_num}. {task_tuple.question}")
+        answer_to_question = _get_input()
         user_output = get_output_for_user(answer_to_question, task_tuple)
         was_correct_answer = is_correct_answer(task_tuple, answer_to_question, user_output)
         if was_correct_answer:
@@ -76,8 +75,8 @@ def get_output_for_user(answer_to_question, task_tuple):
 
 def _print_correct_or_incorrect(user_output, was_correct_answer):
     print_this = ""
-    if user_output:
-        print_this += "=> {}".format(user_output)
+    if user_output and user_output != "None":
+        print_this += f"=> {user_output}"
     if was_correct_answer:
         print_this += "\nCorrect\n"
     else:
@@ -87,10 +86,3 @@ def _print_correct_or_incorrect(user_output, was_correct_answer):
 
 def _run_exec(answer_to_question):
     return ("=" in answer_to_question) or ("del" in answer_to_question)
-
-
-def _answer_only_y_or_n(y_n_answer):
-    y_n = {"Y": True, "N": False}
-    while y_n_answer.upper() != "Y" and y_n_answer.upper() != "N":
-        y_n_answer = input("Please enter y or n\n")
-    return y_n[y_n_answer.upper()]

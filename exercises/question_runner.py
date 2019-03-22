@@ -17,7 +17,6 @@ def run():
 
     print(f"You got {len(TASKS)}/{len(TASKS)} questions right\n")
     _bonus()
-    exit()
 
 
 def _bonus():
@@ -44,3 +43,10 @@ def _user_wants_to_retry_quiz():
         sure = input("Are you sure you want to quit the quiz? (y/n)\n")
         retry = not _answer_only_y_or_n(sure)
     return retry
+
+
+def _answer_only_y_or_n(y_n_answer):
+    y_n = {"Y": True, "N": False}
+    while y_n_answer.upper() != "Y" and y_n_answer.upper() != "N":
+        y_n_answer = input("Please enter y or n\n")
+    return y_n[y_n_answer.upper()]

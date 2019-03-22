@@ -6,13 +6,15 @@ PRINT_SHOES = "shoes = {}".format(SHOES)
 
 BLURB = "\n\nFor the following questions remember that lists are zero-indexed. Meaning the first element will be at index 0, the second element at index 1 etc.\n\n"
 
-# TASKS is a list of lists. Each sublist follows this structure:
-# [
-#   <Background information to print>,
-#   <question text>,
-#   <list of answer keywords>,
-#   <prerequisite conditions>
-# ]
+"""
+TASKS is a list of lists. Each sublist follows this structure:
+[
+  <Background information to print>,
+  <question text>,
+  <list of answer keywords>,
+  <prerequisite conditions>
+]
+"""
 
 TASKS = [
     [
@@ -61,7 +63,7 @@ TASKS = [
 ]
 
 
-TASKS = [
+SHORT_TASKS = [
     [
         PRINT_CLOTHES,
         "Can you change the third element to be 'jacket' instead?\n\n",
@@ -80,11 +82,4 @@ TASKS = [
         ["clothes", "('shorts')", ".", "remove"],
         {"clothes": CLOTHES},
     ],
-]
-
-
-TASKS = [
-    ["", "type a\n\n", ["a"], {"a": 1}],
-    ["", 'type "b"\n\n', ["b"], {"b": 2}],
-    ["", 'type "c"\n\n', ["c"], {"c": 3}],
 ]

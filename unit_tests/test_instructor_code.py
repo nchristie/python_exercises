@@ -1,19 +1,31 @@
 from exercises.helpers import is_correct_answer, ennumerate_task_list, question_tuple_maker, standardise_string, create_question_list, run_all_questions, get_output_for_user
+from exercises.question_runner import run
 from collections import namedtuple
 import unittest
 import pytest
 from unittest import TestCase, mock
-
-        # GIVEN
-        # WHEN
-        # THEN
+from exercises.tasks import *
 
 
 class Tests(unittest.TestCase):
     # SETUP
+
+    SHORTER_TASKS = [
+        ["", "type a\n\n", ["a"], {"a": 1}],
+        ["", 'type "b"\n\n', ["b"], {"b": 2}],
+        ["", 'type "c"\n\n', ["c"], {"c": 3}],
+    ]
+
+
     clothes = ["shirt", "trousers", "blouse", "socks", "leggings", "shorts"]
 
     shoes = ["sneakers", "heels", "flip-flops"]
+
+    raw_task_list = [
+    ["", "type a\n\n", ["a"], {"a": 1}],
+    ["", 'type "b"\n\n', ["b"], {"b": 2}],
+    ["", 'type "c"\n\n', ["c"], {"c": 3}],
+]
 
     enumerated_task_list = [
         [1, "instructions", "question", ["a", "b"], {"a": "a", "b": "b"}],
@@ -46,6 +58,36 @@ class Tests(unittest.TestCase):
 
     real_list_of_remaining_questions = [real_question_1, real_question_2]
 
+    @mock.patch("exercises.tasks.TASKS", task_list=[
+        ["", "type a\n\n", ["a"], {"a": 1}],
+        ["", 'type "b"\n\n', ["b"], {"b": 2}],
+        ["", 'type "c"\n\n', ["c"], {"c": 3}],
+    ])
+    @mock.patch("exercises.helpers._get_input", side_effect=["a", "b", "c"])
+    def test_run_shorter_tasks(self, _get_input_mock, _mock_task_list):
+        #GIVEN
+        run()
+
+        # THEN
+        _get_input_mock.assert_called_with()
+
+    # @mock.patch("exercises.tasks.TASKS", task_list=TASKS[:-1])
+    # @mock.patch("exercises.helpers._get_input", side_effect=[
+    #     "clothes[2] = 'jacket'",
+    #     "clothes[-1] = 'hat'",
+    #     "clothes[-2] = clothes[0]",
+    #     "clothes.append('jumper')",
+    #     "clothes = clothes + shoes",
+    #     "shoes * 5",
+    #     "del clothes[1]",
+    #     #"clothes.remove('shorts')"
+    #     ])
+    # def test_run(self, _get_input_mock, _mock_task_list):
+    #     #GIVEN
+    #     run()
+
+    #     # THEN
+    #     #self.assertTrue(False)
 
     def test_ennumerate_task_list(self):
         # GIVEN
@@ -88,16 +130,11 @@ class Tests(unittest.TestCase):
         run_all_questions(self.list_of_remaining_questions)
 
         # THEN
-        _get_input_mock.assert_has_calls(
-            [mock.call(self.list_of_remaining_questions[0]),
-            mock.call(self.list_of_remaining_questions[1])]
-        )
+        _get_input_mock.assert_called_with()
 
 
     @mock.patch("exercises.helpers._get_input", side_effect=["clothes[2]='jacket'", "del clothes[1]"])
     def test_run_all_questions_with_real_answers_all_correct(self, _get_input_mock):
-        # GIVEN
-
         # WHEN
         expected = []
         actual = run_all_questions(self.real_list_of_remaining_questions)
@@ -107,9 +144,7 @@ class Tests(unittest.TestCase):
 
 
     @mock.patch("exercises.helpers._get_input", side_effect=["z", "del clothes[1]"])
-    def test_run_all_questions_with_real_answer_all_wrong(self, _get_input_mock):
-        # GIVEN
-
+    def test_run_all_questions_with_real_answer_one_right(self, _get_input_mock):
         # WHEN
         expected = [self.real_question_1]
         actual = run_all_questions(self.real_list_of_remaining_questions)
@@ -119,9 +154,7 @@ class Tests(unittest.TestCase):
 
 
     @mock.patch("exercises.helpers._get_input", side_effect=[None, "y"])
-    def test_run_all_questions_with_real_answer_one_right(self, _get_input_mock):
-        # GIVEN
-
+    def test_run_all_questions_with_real_answer_all_wrong(self, _get_input_mock):
         # WHEN
         expected = self.real_list_of_remaining_questions
         actual = run_all_questions(self.real_list_of_remaining_questions)
