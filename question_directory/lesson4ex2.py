@@ -1,3 +1,21 @@
+# TASKS is a list of lists. Each sublist follows this structure:
+# [
+#   <string of background information to print>,
+#   <string of question text>,
+#   <list of answer keywords>,
+#   <dictionary of prerequisite conditions>
+# ]
+
+"""
+empty object for copy-paste:
+[
+    "", # background info
+    "", # question
+    [], # list of required keywords
+    {}, # dict or prerequisite conditions
+],
+"""
+
 CLOTHES = ["shirt", "trousers", "blouse", "socks", "leggings", "shorts"]
 SHOES = ["sneakers", "heels", "flip-flops"]
 
@@ -5,16 +23,6 @@ PRINT_CLOTHES = "clothes = {}".format(CLOTHES)
 PRINT_SHOES = "shoes = {}".format(SHOES)
 
 BLURB = "\n\nFor the following questions remember that lists are zero-indexed. Meaning the first element will be at index 0, the second element at index 1 etc.\n\n"
-
-"""
-TASKS is a list of lists. Each sublist follows this structure:
-[
-  <string of background information to print>,
-  <string of question text>,
-  <list of answer keywords>,
-  <dictionary of prerequisite conditions>
-]
-"""
 
 TASKS = [
     [

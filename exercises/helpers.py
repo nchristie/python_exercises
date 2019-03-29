@@ -1,4 +1,5 @@
 from collections import namedtuple
+from time import sleep
 
 def ennumerate_task_list(task_list):
     for i, value in enumerate(task_list, 0):
@@ -35,6 +36,7 @@ def run_all_questions(list_of_remaining_questions):
         if was_correct_answer:
             remove_list.append(task_tuple)
         print(_print_correct_or_incorrect(user_output, was_correct_answer))
+        sleep(.5)
     for i in remove_list:
         list_of_remaining_questions.remove(i)
     return list_of_remaining_questions

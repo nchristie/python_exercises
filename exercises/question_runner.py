@@ -1,10 +1,14 @@
+from time import sleep
+
 from exercises.helpers import run_all_questions, create_question_list, ennumerate_task_list
 from question_directory.lesson4ex2 import TASKS, BLURB
-#from question_directory.lesson2ex1 import TASKS, BLURB
-
 
 def run():
     print(BLURB)
+    word_num = len(BLURB)
+    fraction_of_second_to_read_each_word = 0.025
+    sleep_len = word_num * fraction_of_second_to_read_each_word
+    sleep(sleep_len)
     list_of_remaining_questions = run_all_questions(create_question_list(ennumerate_task_list(TASKS)))
 
     while list_of_remaining_questions:
