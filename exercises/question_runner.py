@@ -1,5 +1,6 @@
 from exercises.helpers import run_all_questions, create_question_list, ennumerate_task_list
 from question_directory.lesson4ex2 import TASKS, BLURB
+#from question_directory.lesson2ex1 import TASKS, BLURB
 
 
 def run():
@@ -24,12 +25,12 @@ def _bonus():
     """
                                     .''.
         .''.      .        *''*    :_\\/_:     .
-        :_\\/_:   _\\(/_  .:.*_\\/_*   : /\\:  .'.:.'.
-    .''.: /\\ :   ./)\\   ':'* /\\ * :  '..'.  -=:o:=-
+       :_\\/_:   _\\(/_  .:.*_\\/_*   : /\\:  .'.:.'.
+   .''.: /\\ :   ./)\\   ':'* /\\ * :  '..'.  -=:o:=-
   :_\\/_:'.:::.    ' *''*    * '.\\'/.' _\\(/_'.':'.'
   : /\\ : :::::     *_\\/_*     -= o =-  /)\\    '  *
-    '..'  ':::'     * /\\ *     .'/.\\'.   '
-        *            *..*         :
+   '..'  ':::'     * /\\ *     .'/.\\'.   '
+       *            *..*         :
     """
     )
     print("\n\n")

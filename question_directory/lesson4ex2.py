@@ -9,10 +9,10 @@ BLURB = "\n\nFor the following questions remember that lists are zero-indexed. M
 """
 TASKS is a list of lists. Each sublist follows this structure:
 [
-  <Background information to print>,
-  <question text>,
+  <string of background information to print>,
+  <string of question text>,
   <list of answer keywords>,
-  <prerequisite conditions>
+  <dictionary of prerequisite conditions>
 ]
 """
 

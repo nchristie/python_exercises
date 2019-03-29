@@ -15,6 +15,8 @@ from unittest import TestCase, mock
 from exercises.question_runner import _bonus
 
 
+
+
 class Tests(unittest.TestCase):
     # SETUP
 
@@ -294,6 +296,11 @@ class Tests(unittest.TestCase):
 
         # THEN
         self.assertEqual(expected, actual)
+
+    def test_bonus_looks_okay(self):
+        # THEN
+        _bonus()
+        self.assertTrue(True) # it's a hack, but replace True with False to see what bonus looks like in the output
 
     # def test_xxx(self):
     # GIVEN
