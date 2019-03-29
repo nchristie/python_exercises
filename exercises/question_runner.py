@@ -1,5 +1,5 @@
 from exercises.helpers import run_all_questions, create_question_list, ennumerate_task_list
-from exercises.tasks import TASKS, BLURB
+from question_directory.lesson4ex2 import TASKS, BLURB
 
 
 def run():
@@ -21,16 +21,16 @@ def run():
 def _bonus():
     print("Congratulations on passsing the quiz!!!")
     print(
-        """
+    """
                                     .''.
-        .''.      .        *''*    :_\/_:     .
-        :_\/_:   _\(/_  .:.*_\/_*   : /\ :  .'.:.'.
-    .''.: /\ :   ./)\   ':'* /\ * :  '..'.  -=:o:=-
-  :_\/_:'.:::.    ' *''*    * '.\'/.' _\(/_'.':'.'
-  : /\ : :::::     *_\/_*     -= o =-  /)\    '  *
-    '..'  ':::'     * /\ *     .'/.\'.   '
+        .''.      .        *''*    :_\\/_:     .
+        :_\\/_:   _\\(/_  .:.*_\\/_*   : /\\:  .'.:.'.
+    .''.: /\\ :   ./)\\   ':'* /\\ * :  '..'.  -=:o:=-
+  :_\\/_:'.:::.    ' *''*    * '.\\'/.' _\\(/_'.':'.'
+  : /\\ : :::::     *_\\/_*     -= o =-  /)\\    '  *
+    '..'  ':::'     * /\\ *     .'/.\\'.   '
         *            *..*         :
-    """  # no-qa
+    """
     )
     print("\n\n")
 
