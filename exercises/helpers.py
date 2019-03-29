@@ -1,6 +1,5 @@
 from collections import namedtuple
 
-
 def ennumerate_task_list(task_list):
     for i, value in enumerate(task_list, 0):
         task_list[i].insert(0, i + 1)
