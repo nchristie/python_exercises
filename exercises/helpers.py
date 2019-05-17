@@ -54,7 +54,7 @@ def is_correct_answer(task_tuple, answer_to_question, user_output=None):
 def standardise_string(string):
     if not string:
         return string
-    return string.replace("\'", "\"")
+    return string.replace("'", '"')
 
 
 def get_output_for_user(answer_to_question, task_tuple):

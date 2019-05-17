@@ -72,7 +72,6 @@ class Tests(unittest.TestCase):
 
     real_list_of_remaining_questions = [real_question_1, real_question_2]
 
-
     @mock.patch("exercises.question_runner._bonus", bonus="")
     @mock.patch("exercises.question_runner.BLURB", name="This is a test run")
     @mock.patch(
@@ -91,8 +90,7 @@ class Tests(unittest.TestCase):
 
         # THEN
         assert mock_bonus.called_once_with()
-        self.assertTrue(False) # see 'You got 0/0 questions right', expect 3/3
-
+        self.assertTrue(False)  # see 'You got 0/0 questions right', expect 3/3
 
     @mock.patch(
         "exercises.helpers._get_input",
@@ -114,7 +112,6 @@ class Tests(unittest.TestCase):
 
         # THEN
         assert mock_bonus.called_once_with()
-
 
     def test_ennumerate_task_list(self):
         # GIVEN
