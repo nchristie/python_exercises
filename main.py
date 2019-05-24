@@ -4,10 +4,11 @@ Press run above to start
 
 if input("\n\nPress enter to start\n") != "test":
     from exercises.question_runner import run
+    from question_directory.lesson4ex2 import TASKS, BLURB
 
-    run()
+    run(TASKS, BLURB)
 else:
-    from unit_tests.test_instructor_code import *
+    from unit_tests.test_instructor_code import *  # noqa
 
     if __name__ == "__main__":
-        unittest.main()
+        unittest.main()  # noqa

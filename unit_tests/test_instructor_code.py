@@ -11,6 +11,7 @@ from exercises.question_runner import run, _bonus
 from collections import namedtuple
 import unittest
 from unittest import mock
+from question_directory.lesson4ex2 import TASKS as tasks, BLURB as blurb
 
 
 class Tests(unittest.TestCase):
@@ -291,7 +292,7 @@ class Tests(unittest.TestCase):
     @mock.patch("exercises.question_runner._bonus", bonus="")
     def test_run(self, mock_bonus, mock_get_input):
         # GIVEN
-        run()
+        run(tasks, blurb)
 
         # THEN
         assert mock_bonus.called_once_with()
