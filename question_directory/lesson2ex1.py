@@ -21,9 +21,6 @@ BLURB = (
 )
 
 TASKS = [
-    ["", "Subtract one number from another\n\n", ["-"], {}],
-    ["", "Divide one number by the other\n\n", ["/"], {}],
-    ["", "Write a line of code which will display a string to the terminal\n\n", ["print"], {}],
     [
         "",  # background info
         "Subtract one number from another\n\n",  # question
