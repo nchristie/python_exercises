@@ -7,7 +7,7 @@ from exercises.helpers import (
     run_all_questions,
     get_output_for_user,
 )
-from exercises.question_runner import run
+from exercises.question_runner import run, _bonus
 from collections import namedtuple
 import unittest
 from unittest import mock
@@ -277,11 +277,6 @@ class Tests(unittest.TestCase):
         _bonus()
         self.assertTrue(True) # it's a hack, but replace True with False to see what bonus looks like in the output
 
-    # def test_xxx(self):
-    # GIVEN
-    # WHEN
-    # THEN
-    #     self.assertTrue(False)
     @mock.patch(
         "exercises.helpers._get_input",
         side_effect=[
