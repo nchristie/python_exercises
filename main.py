@@ -4,7 +4,7 @@ Press run above to start
 
 if input("\n\nPress enter to start\n") != "test":
     from exercises.question_runner import run
-    from question_directory.lesson4ex2 import TASKS, BLURB
+    from question_directory.operators import TASKS, BLURB
 
     run(TASKS, BLURB)
 else:
