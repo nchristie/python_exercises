@@ -297,21 +297,19 @@ class Tests(unittest.TestCase):
         # THEN
         assert mock_bonus.called_once_with()
 
-    # @mock.patch("exercises.question_runner._bonus", bonus="")
-    # @mock.patch("exercises.question_runner.BLURB", name="This is a test run")
-    # @mock.patch(
-    #     "exercises.tasks.TASKS",
-    #     task_list=[
-    #         ["", "type a\n\n", ["a"], {"a": 1}],
-    #         ["", 'type "b"\n\n', ["b"], {"b": 2}],
-    #         ["", 'type "c"\n\n', ["c"], {"c": 3}],
-    #     ],
-    # )
-    # @mock.patch("exercises.helpers._get_input", side_effect=["a", "b", "c"])
-    # def test_run_shorter_tasks(self, mock_get_input, mock_task_list, mock_blurb, mock_bonus):
-    #     # GIVEN
-    #     run()
+    @mock.patch("exercises.question_runner._bonus", bonus="")
+    @mock.patch("exercises.helpers._get_input", side_effect=["a", "b", "c"])
+    def test_run_shorter_tasks(self, mock_get_input, mock_bonus):
 
-    #     # THEN
-    #     assert mock_bonus.called_once_with()
-    #     #self.assertTrue(False) # see 'You got 0/0 questions right', expect 3/3
+        # GIVEN
+        tasks = [
+            ["", "type a\n\n", ["a"], {"a": 1}],
+            ["", 'type "b"\n\n', ["b"], {"b": 2}],
+            ["", 'type "c"\n\n', ["c"], {"c": 3}],
+        ]
+        blurb = "This is a test run"
+        run(tasks, blurb)
+
+        # THEN
+        assert mock_bonus.called_once_with()
+        self.assertTrue(True)  # hacky, but set True to False to see what the output looks like
