@@ -10,9 +10,7 @@ from exercises.helpers import (
 from exercises.question_runner import run
 from collections import namedtuple
 import unittest
-import pytest
-from unittest import TestCase, mock
-from exercises.question_runner import _bonus
+from unittest import mock
 
 
 
@@ -73,28 +71,6 @@ class Tests(unittest.TestCase):
 
     real_list_of_remaining_questions = [real_question_1, real_question_2]
 
-
-    @mock.patch(
-        "exercises.helpers._get_input",
-        side_effect=[
-            "clothes[2] = 'jacket'",
-            "clothes[-1] = 'hat'",
-            "clothes[-2] = clothes[0]",
-            "clothes.append('jumper')",
-            "clothes = clothes + shoes",
-            "shoes * 5",
-            "clothes.remove('socks')",
-            "del clothes[1]",
-        ],
-    )
-    @mock.patch("exercises.question_runner._bonus", bonus="")
-    def test_run(self, mock_bonus, mock_get_input):
-        # GIVEN
-        run()
-
-        # THEN
-        assert mock_bonus.called_once_with()
-
     def test_ennumerate_task_list(self):
         # GIVEN
         task_list = [[], [], [], []]
@@ -129,7 +105,6 @@ class Tests(unittest.TestCase):
     @mock.patch("exercises.helpers._get_input", side_effect=[0, 1])
     def test_run_all_questions(self, _get_input_mock):
         # GIVEN
-        task_tuple = self.list_of_remaining_questions[0]
         run_all_questions(self.list_of_remaining_questions)
 
         # THEN
@@ -307,3 +282,42 @@ class Tests(unittest.TestCase):
     # WHEN
     # THEN
     #     self.assertTrue(False)
+    @mock.patch(
+        "exercises.helpers._get_input",
+        side_effect=[
+            "clothes[2] = 'jacket'",
+            "clothes[-1] = 'hat'",
+            "clothes[-2] = clothes[0]",
+            "clothes.append('jumper')",
+            "clothes = clothes + shoes",
+            "shoes * 5",
+            "clothes.remove('socks')",
+            "del clothes[1]",
+        ],
+    )
+    @mock.patch("exercises.question_runner._bonus", bonus="")
+    def test_run(self, mock_bonus, mock_get_input):
+        # GIVEN
+        run()
+
+        # THEN
+        assert mock_bonus.called_once_with()
+
+    # @mock.patch("exercises.question_runner._bonus", bonus="")
+    # @mock.patch("exercises.question_runner.BLURB", name="This is a test run")
+    # @mock.patch(
+    #     "exercises.tasks.TASKS",
+    #     task_list=[
+    #         ["", "type a\n\n", ["a"], {"a": 1}],
+    #         ["", 'type "b"\n\n', ["b"], {"b": 2}],
+    #         ["", 'type "c"\n\n', ["c"], {"c": 3}],
+    #     ],
+    # )
+    # @mock.patch("exercises.helpers._get_input", side_effect=["a", "b", "c"])
+    # def test_run_shorter_tasks(self, mock_get_input, mock_task_list, mock_blurb, mock_bonus):
+    #     # GIVEN
+    #     run()
+
+    #     # THEN
+    #     assert mock_bonus.called_once_with()
+    #     #self.assertTrue(False) # see 'You got 0/0 questions right', expect 3/3
