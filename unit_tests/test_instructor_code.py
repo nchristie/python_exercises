@@ -13,8 +13,6 @@ import unittest
 from unittest import mock
 
 
-
-
 class Tests(unittest.TestCase):
     # SETUP
 
@@ -275,7 +273,7 @@ class Tests(unittest.TestCase):
     def test_bonus_looks_okay(self):
         # THEN
         _bonus()
-        self.assertTrue(True) # it's a hack, but replace True with False to see what bonus looks like in the output
+        self.assertTrue(True)  # it's a hack, but replace True with False to see what bonus looks like in the output
 
     @mock.patch(
         "exercises.helpers._get_input",
