@@ -12,7 +12,7 @@ empty object for copy-paste:
     "", # background info
     "", # question
     [], # list of required keywords
-    {}, # dict of prerequisite conditions
+    {}, # dict of variables to set up before question
 ],
 """
 
