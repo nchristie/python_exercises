@@ -18,25 +18,24 @@ empty object for copy-paste:
 ],
 """
 
-BLURB = ""
+BLURB = "For the following questions answer by typing the letter a, b or c. These will correspond to the multiple choice answers you'll see below.\n"
 TASKS = [
     [
-        "def hello(name)\n    print('hello ' + name)\n    return\n",  # background info
-        "What's missing?\n a) :\n b) def\n c) '\n",  # question
-        ['a'],  # list of required keywords
-        {},  # dict of variables to set up before question
+        "\ndef hello(name)\n    print('hello ' + name)\n    return\n",  # background info
+        "What's missing?\n a. :\n b. def\n c. '\n",  # question
+        ["a"],  # list of required keywords
+        {"a": "", "b": "", "c": ""},  # dict of variables to set up before question
     ],
     [
-        "hello(name):\n    print('hello ' + name)\n    return\n",  # background info
-        "What's missing?\n a) :\n b) def\n c) '\n"",  # background info
-        "",  # question
-        ['b'],  # list of required keywords
-        {},  # dict of variables to set up before question
+        "\nhello(name):\n    print('hello ' + name)\n    return\n",  # background info
+        "What's missing?\n a. :\n b. def\n c. '\n",  # question
+        ["b"],  # list of required keywords
+        {"a": "", "b": "", "c": ""},  # dict of variables to set up before question
     ],
     [
-        "def hello(name):\n    print(hello' + name)\n    return\n",  # background info
-        "What's missing?\n a) :\n b) def\n c) '\n",  # question
-        ['c'],  # list of required keywords
-        {},  # dict of variables to set up before question
+        "\ndef hello(name):\n    print(hello' + name)\n    return\n",  # background info
+        "What's missing?\n a. :\n b. def\n c. '\n",  # question
+        ["c"],  # list of required keywords
+        {"a": "", "b": "", "c": ""},  # dict of variables to set up before question
     ],
 ]

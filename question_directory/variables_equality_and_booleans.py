@@ -49,7 +49,7 @@ TASKS = [
     ],
     [
         "\ngoogle_up = False\nfacebook_up = True\n",  # background info
-        "google_up or facebook_up\n",  # question
+        "What result do you expect from this statement? \ngoogle_up or facebook_up\n",  # question
         ["True"],  # list of required keywords
         {"google_up": False, "facebook_up": True},  # dict of variables to set up before question
     ],
