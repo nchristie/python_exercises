@@ -1,3 +1,5 @@
+# Slide link: https://kathrinschuler.github.io/slide-python-intro/#/10/3
+
 # TASKS is a list of lists. Each sublist follows this structure:
 # [
 #   <string of background information to print>,
