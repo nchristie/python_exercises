@@ -16,13 +16,20 @@ empty object for copy-paste:
 ],
 """
 
-BLURB = "\nOperators\nIn this excercise you'll get to see how much you know about how to do simple maths using python\nThe following questions are all multiple choice, only one answer will be correct, enter the letter of that answer and enter."
+BLURB = "\nOperators\nIn this excercise you'll get to see how much you know about how to do simple maths using python\nThe following questions are all multiple choice, only one answer will be correct.\nAnswer using the letter (a, b, c or d)."
+
 
 TASKS = [
     [
-        "Which is correct code?",  # background info
-        "\n\ta. '1' + '2'\n\tb. 1 '+' 2\n\tc. 1 + 2\n\td. '1 + 2'\n\t",  # question
-        ["c"],  # list of required keywords
+        "Which symbol do we use to add numbers?",  # background info
+        "\n\ta. +\n\tb. \\\n\tc. /\n\td. %\n\t",  # question
+        ["a"],  # list of required keywords
+        {"a": "", "b": "", "c": "", "d": ""},  # dict of variables to set up before question
+    ],
+    [
+        "Which symbol do we use to subtract numbers?",  # background info
+        "\n\ta. +\n\tb. -\n\tc. /\n\td. %\n\t",  # question
+        ["b"],  # list of required keywords
         {"a": "", "b": "", "c": "", "d": ""},  # dict of variables to set up before question
     ],
     [
@@ -50,15 +57,9 @@ TASKS = [
         {"a": "", "b": "", "c": "", "d": ""},  # dict of variables to set up before question
     ],
     [
-        "Which symbol do we use to add numbers?",  # background info
-        "\n\ta. +\n\tb. \\\n\tc. /\n\td. %\n\t",  # question
-        ["a"],  # list of required keywords
-        {"a": "", "b": "", "c": "", "d": ""},  # dict of variables to set up before question
-    ],
-    [
-        "Which symbol do we use to subtract numbers?",  # background info
-        "\n\ta. +\n\tb. -\n\tc. /\n\td. %\n\t",  # question
-        ["b"],  # list of required keywords
+        "Which is correct code?",  # background info
+        "\n\ta. '1' + '2'\n\tb. 1 '+' 2\n\tc. 1 + 2\n\td. '1 + 2'\n\t",  # question
+        ["c"],  # list of required keywords
         {"a": "", "b": "", "c": "", "d": ""},  # dict of variables to set up before question
     ],
 ]
